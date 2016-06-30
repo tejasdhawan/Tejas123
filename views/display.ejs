@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Users</h1>
+    <table>
+      <th>fname</th><th>lname</th>
+    
+    <% topic.forEach(function(topic) { %>
+      <tr><td><%= topic.fname %> </td><td> <%= topic.lname %></td></tr>
+    <% }); %>
+    
+    </table>
+
+    <br>
+    <br>
+    <a href="add.ejs"> add </a>
+    <!-- <form id="frm2" action="update"  method="get"><input type="submit" value="update"></form>
+<form id="frm3" action="deletee"  method="post"><input type="submit" value="delete"></form> -->
+  </body>
+</html>

@@ -1,0 +1,42 @@
+body{
+	overflow-y: scroll;
+overflow-x: scroll;
+}
+.container1{
+	
+position: absolute;
+        top: 392px;
+    left: 723px;
+}
+#ord{
+	width: 230px;
+    height: 70px;
+    
+}
+#off{
+	width: 230px;
+    height: 70px;
+    
+}
+.off1{
+	position: absolute;
+    top: 18px;
+    left: -334px;
+}
+.off2{
+	position: absolute;
+    top: 323px;
+    left: 66px;
+}
+o{
+	font-size: 51px;
+
+}
+.nut1{
+	position: absolute;
+    top: 20px;
+    left: 331px;
+}
+h4{
+	color: black;
+}

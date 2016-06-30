@@ -1,0 +1,305 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+
+    <link rel='stylesheet' href="https://cdn.rawgit.com/Leaverou/awesomplete/gh-pages/awesomplete.css">
+
+
+    </head>
+  <body>
+    <div class="container">
+      <h1>Order Dashboard</h1>
+      <hr/>
+
+        <!--  <div class="form-group">
+      <label for="usr">Search:</label>
+      <input type="text" id="sea" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+      <div class="form-group">
+      <div class="ui-widget">
+         
+         <label for="automplete-1">Search: </label>
+         <input id="automplete-1">
+      </div></div>
+      <!-- <input class="awesomplete" type="text" id="myinput"> -->
+     <!-- <a href="sort" class="btn btn-info" id="off"><h3>Offers</h3></a>
+ -->
+
+   <!--  </div> -->
+     
+    
+             
+
+      <nav class="navbar navbar-inverse">
+        <ul class="nav nav-pills">
+          <!-- <li role="presentation"><a href="#new">New Item</a></li> -->
+          <li role="presentation"><a href="#employee-list">Food Item List</a></li>
+          <li role="presentation"><a href="nutri">Nutrition Data</a></li>          
+        </ul>      
+      </nav>
+      <div class="page">  </div>
+    </div>
+   
+
+      
+
+
+
+
+    <script type="text/x-handlebars-template" id="employee-list-template">
+          
+    <div class="table-responsive">
+      <table class="table">
+        <thead>          
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Full Price</th>
+      
+          <th>Operation</th>
+        </thead><!--Table Header Ends-->
+        
+        {{#each employees}}
+        <tr>
+          <td>{{this.name }}</td>
+          <td>{{ this.category }}</td>
+          <td>{{ this.fullPrice}}</td>
+                    
+          <td><a  href="checkout" class="btn btn-primary">Order Now</a></td>
+          <td><button class="btn btn-warning delete" data-id="{{this._id}}">DELETE</button></td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+
+    </script>
+
+
+      <script type="text/javascript">
+
+        var input = document.getElementById('myinput');
+        var awesomplete = new Awesomplete(input,{
+          list:["chicken","burger","pizza","icecream"]
+          // minChars:1
+        });
+
+      </script>
+         
+
+
+   
+
+
+    <script src="javascripts/jquery.js" type="text/javascript"></script>
+    <script src="javascripts/underscore.js" type="text/javascript"></script>
+    <script src="javascripts/handlebars-v3.0.3.js" type="text/javascript"></script>
+    <script src="javascripts/backbone.js" type="text/javascript"></script>
+    <script src="https://cdn.rawgit.com/Leaverou/awesomplete/gh-pages/awesomplete.min.js" type="text/javascript"></script>
+    <script src="http://evjang.com/backbone-autocomplete/javascripts/backbone.autocomplete-min.js"></script>
+   
+
+    <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            var availableTutorials = [
+               "chicken Snaker",
+               "Pasata",
+               "Humberger",
+               "Boneless strip",
+               "Popcorn Chicken",
+               "Hot Wings",
+               "Veg Strip",
+               "Burger",
+               "Pizza",
+               "biryani",
+            ];
+            $( "#automplete-1" ).autocomplete({
+               source: availableTutorials
+            });
+         });
+      </script>
+
+
+   
+    <script >  
+    //serialize object is used to get form data in a object in key-value pair
+      $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+      }; 
+
+
+
+
+
+      var Employees = Backbone.Collection.extend({     //Item Collection
+        
+        url: '/employees'
+      });
+
+      var Employee = Backbone.Model.extend({        //item Model
+        
+        urlRoot: '/employees'                
+      });
+
+      //el
+      //initialize(write the fetch function inside this)
+      //events
+      //render
+      //eventhandlers
+
+              
+
+
+
+
+
+
+              
+            var MyView = Backbone.View.extend({
+                initialize: function () {
+                    this.myCollection = new Employees();
+                    this.myCollection.fetch(); // I would like to fetch the collection 
+                                               // only when the user start to type the first letter  
+                },
+                events: {
+                    'focus #sea': 'getAutocomplete'
+                },
+
+                getAutocomplete: function () {
+                    $("#sea").autocomplete({
+                        source: JSON.stringify(this.myCollection)
+                    });
+                }
+            });
+
+
+              var BooksCollection = Backbone.Collection.extend({
+                model: Employee,
+    
+                  comparator: function (model) {
+                      return model.get("name");
+                  },
+              });
+
+
+
+
+
+
+
+
+
+
+      var NewItemListView = Backbone.View.extend({     //Employee List View
+
+        el:'.page',
+        render: function() {
+          var that = this;
+          var employees = new Employees();  //create model Object
+          
+          employees.fetch({                 //fetch method to get item List 
+            success: function (employees) {
+              console.log("Success")
+              console.log(employees.toJSON())
+              var template = Handlebars.compile($('#employee-list-template').html()); 
+              that.$el.html(template({employees: employees.toJSON()}));
+              
+            }, error: function(){
+              
+            }
+          })  //users.fetch ends here..                              
+        },
+        events: {                           //events of view are register here      
+        
+        'click .delete':'deleteUser',
+        'click .sort' : 'sortlist'
+        
+        },
+        deleteUser:function(ev){                  
+
+          var empId = $(ev.currentTarget).data('id');
+          var employee = new Employee({id: empId});
+
+          employee.destroy({
+            success:function(){
+              window.location.reload();
+            }
+          })
+          return false;
+        },
+
+        // sortlist:function(){
+
+        //       SomeCollection = new Employees();
+        //       SomeCollection.comparator({
+        //         success:function(){
+        //           window.location.reload();
+        //         }
+        //       })
+        //       return false;
+                 
+        // }
+        
+      });
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+        var Router = Backbone.Router.extend({
+          routes:{
+              '' : 'home',
+            
+              'employee-list':'empList'
+
+          }
+        })
+
+        
+        var newItemList = new NewItemListView();
+        
+
+        var router = new Router();
+        router.on('route:home',function(){          
+          newItemList.render();
+        });
+
+       
+
+        router.on('route:empList',function(id){
+          console.log('show user form');
+          newItemList.render({id: id});
+        });
+        Backbone.history.start();
+        
+    </script>      
+  </body>
+ </html>  
+
+

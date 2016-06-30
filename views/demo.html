@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Change Password</title>
+</head>
+
+<body>
+
+	<form name = "demo" action = "demo" onsubmit ="return checkform()">
+
+		<label>User Name : </label><input type = "text" name = "unm"><br>
+		<label>Previous Password : </label><input type = "password" name = "ppass"><br>
+		<label>Password : </label><input type = "password" name = "pass"><br>
+		<label>Confirm Password :</label><input type = "password" name = "cpass"><br>
+		<input type ="button" class = "btn btn-default" value = "Submit"><br>
+		<input type ="button" class ="btn btn=primary" value= "cancel">
+		
+
+	</form>
+	<script type = "text/javascript">
+
+			function checkform(){
+				var a = document.forms["demo"]["unm"].value;
+				var b = document.forms["demo"]["ppass"].value;
+				var c = document.forms["demo"]["pass"].value;
+				var d = document.forms["demo"]["cpass"].value;
+
+				if(a==""){
+
+					alert("plz enter user Name...");
+					a.focus();
+				}
+				else if(b==""){
+					alert("plz enter Previous password");
+					b.focus();
+				}
+				else if(c==""){
+					alert("plz enter password");
+					c.focus();
+				}
+				else if(d==""){
+					alert("plz enter Confirm password");
+					d.focus();
+				}
+				else if(c.length !== d.length){
+					alert("plz fill correct password and Confirm password...");
+
+
+				}
+				else{
+					alert("data fill successfully...");
+				}
+			}
+
+	</script>
+
+</body>
+</html>

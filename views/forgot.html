@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Bootstrap 3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+
+</head>
+<body>
+	<form  action="forgot"  onsubmit="return checkForm(this)"  method="post" >
+	
+
+  			 <center><h1>Forgot Password </h1></center>
+      <div class="row">
+   <div class="col-sm-4"></div>
+   <div class="col-sm-4">
+    <label>User Name:</label><input class="form-control" type="text" id="unm" name="unm"><br>
+   <!--   <label>Password:</label><input class="form-control" type="password" id="password" name="pass"><br>
+    <label>Confirm Password:</label><input class="form-control" type="password" id="cpass" name="cpass"><br>
+     -->
+       <center><input type="submit" value="Submit" class="btn btn-info" name="btn"/>
+          <a href ="/" class="btn btn-primary">Back</a>
+  
+        </center><hr>
+    </form>
+
+    	<script type="text/javascript">             
+              
+                    	
+   function checkForm(form)
+  {
+    if(form.unm.value == "") {
+      alert("Error: Username cannot be blank!");
+      form.unm.focus();
+      return false;
+    }
+   
+
+    if(form.pass.value != "" && form.pass.value == form.cpass.value) {
+      if(form.pass.value.length < 6) {
+        alert("Error: Password must contain at least six characters!");
+        form.pass.focus();
+        return false;
+      }
+      if(form.pass.value == form.unm.value) {
+        alert("Error: Password must be different from Username!");
+        form.pass.focus();
+        return false;
+      }
+      
+    } else {
+      alert("Error: Please check that you've entered and confirmed your password!");
+      form.pass.focus();
+      return false;
+    }
+
+    // alert("Your password Has Been Changed Successfully  " + form.pass.value);
+    // return true;
+  }
+
+</script>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+</body>
+
+
+
+</html>

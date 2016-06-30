@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Add New User Page</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+  </head>
+<body>
+
+<form  name = "myForm" onsubmit="return validateForm()"  action="add" method="post" >
+	<!-- h1>Add New User</h1>
+  First name:&nbsp;&nbsp;&nbsp;
+  <input type="text" name="value1">
+  <br><br><br>
+  Last name:&nbsp;&nbsp;&nbsp;
+  <input type="text" name="value2">
+  <input type="submit" value="Add" name="btn"> -->
+  	
+  			 <center><h1>Add New User </h1></center>
+      <div class="row">
+   <div class="col-sm-4"></div>
+   <div class="col-sm-4">
+    <label>Frist Name:</label><input class="form-control" type="text" id="fnm" name="fnm"><br>
+     <label>Last Name:</label><input class="form-control" type="text" id="lnm" name="lnm"><br>
+    <label>User Name:</label><input class="form-control" type="text" id="username" name="value1"><br>
+    <label>password:</label><input class="form-control" type="password" id="password" name="value2"><br>
+     <label>State:</label><input class="form-control" type="text" id="state" name="state"><br>
+      <label>City:</label><input class="form-control" type="text" id="city" name="city"><br>
+       <label>Zip Code:</label><input class="form-control" type="text" id="zipcode" name="zipcode"><br>
+        <label>Mobile No.:</label><input class="form-control" type="text" id="mob" name="mob"><br>
+
+       <center><input type="submit" value="Submit" class="btn btn-info" name="btn"/>
+          <a href ="/" class="btn btn-primary">Cancel</a>
+  
+        </center><hr>
+    </form>
+
+         <script type="text/javascript">             
+                    function validateForm() {
+                    	
+                        // var x = document.forms["myForm"]["eaddr"].value;
+                         var y = document.forms["myForm"]["fnm"].value;
+                         var z = document.forms["myForm"]["lnm"].value;
+                        var a = document.forms["myForm"]["state"].value;
+                         var b = document.forms["myForm"]["city"].value;
+                         var c = document.forms["myForm"]["value1"].value;
+                         var d = document.forms["myForm"]["value2"].value;
+                         var e = document.forms["myForm"]["zipcode"].value;
+                         var f = document.forms["myForm"]["mob"].value;
+                        // var atpos = x.indexOf("@");
+                        // var dotpos = x.lastIndexOf(".");
+                        // // var alphaExp = /^[A-Za-z]+$/;
+                      
+                         if(y=="")alert("enter Frist name plz");
+          
+                        // else if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+                        //  alert("Not a valid e-mail address");   }
+                         else if(z=="")alert("enter Last Name plz");
+                        else if(a=="")alert("enter state plz");
+                         else if(b=="")alert("enter city plz");
+                         else if(c=="")alert("enter username plz");
+                         else if(d=="")alert("enter password plz");
+                         else if(e=="")alert("enter zipcode plz");
+                         else if(f=="")alert("enter mobile no. plz")
+                         else alert("all information is valid.");
+                      // window.location='#sub'; 
+                    }
+                </script>
+
+
+
+
+
+
+</body>
+</html>
+
+
